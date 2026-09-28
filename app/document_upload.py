@@ -2,11 +2,6 @@ import streamlit as st
 from pathlib import Path
 from datetime import datetime
 
-
-# =========================================================
-# CONFIGURATION
-# =========================================================
-
 st.set_page_config(
     page_title="SynthGigCredit",
     page_icon="◐",
@@ -14,119 +9,195 @@ st.set_page_config(
 )
 
 BASE_DIR = Path(__file__).resolve().parents[1]
-
 UPLOAD_DIR = BASE_DIR / "data" / "uploads"
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
-
 
 # =========================================================
 # CUSTOM STYLING
 # =========================================================
 
-st.markdown("""
-<style>
+st.markdown(
+    """
+    <style>
 
-.stApp {
-    background-color: #F5EFE5;
-    color: #302A24;
-}
+    /* ---------- Main page ---------- */
 
-.block-container {
-    max-width: 1100px;
-    padding: 45px 55px;
-}
+    .stApp {
+        background:
+            linear-gradient(
+                135deg,
+                #F4F8FB 0%,
+                #EEF5F7 50%,
+                #F8FAFC 100%
+            );
+        color: #172033;
+    }
 
-/* Main title */
+    .block-container {
+        max-width: 1150px;
+        padding: 45px 55px 60px 55px;
+    }
 
-h1 {
-    color: #302A24;
-    font-size: 42px;
-    font-weight: 700;
-    letter-spacing: -1px;
-}
+    /* ---------- Header ---------- */
 
-h2, h3 {
-    color: #302A24;
-}
+    h1 {
+        color: #102A43 !important;
+        font-size: 46px !important;
+        font-weight: 750 !important;
+        letter-spacing: -1.5px;
+        margin-bottom: 5px;
+    }
 
-/* Subtitle */
+    h2, h3 {
+        color: #102A43 !important;
+    }
 
-.subtitle {
-    color: #756C61;
-    font-size: 17px;
-    margin-top: -10px;
-    margin-bottom: 35px;
-}
+    .subtitle {
+        color: #526477;
+        font-size: 18px;
+        margin-bottom: 35px;
+    }
 
-/* Cards */
+    /* ---------- Cards ---------- */
 
-.card {
-    background-color: #FBF8F2;
-    border: 1px solid #DDD2C2;
-    border-radius: 16px;
-    padding: 25px;
-    margin-bottom: 22px;
-}
+    .card {
+        background: #FFFFFF;
+        border: 1px solid #D9E4EC;
+        border-radius: 18px;
+        padding: 26px 28px;
+        margin-bottom: 22px;
+        box-shadow: 0 5px 18px rgba(16, 42, 67, 0.06);
+    }
 
-/* Section titles */
+    .section-title {
+        color: #102A43;
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 7px;
+    }
 
-.section-title {
-    font-size: 21px;
-    font-weight: 600;
-    color: #302A24;
-    margin-bottom: 6px;
-}
+    .small {
+        color: #627487;
+        font-size: 14px;
+        line-height: 1.6;
+    }
 
-/* Small text */
+    /* ---------- Input fields ---------- */
 
-.small {
-    color: #756C61;
-    font-size: 14px;
-}
+    label {
+        color: #263B53 !important;
+        font-weight: 600 !important;
+    }
 
-/* Upload boxes */
+    div[data-baseweb="input"] {
+        background-color: #FFFFFF;
+        border: 1px solid #C9D7E2;
+        border-radius: 10px;
+    }
 
-div[data-testid="stFileUploader"] {
-    background-color: #FBF8F2;
-    border: 1px dashed #B9AB98;
-    border-radius: 12px;
-    padding: 10px;
-}
+    div[data-baseweb="input"]:focus-within {
+        border: 1px solid #159A9C;
+        box-shadow: 0 0 0 2px rgba(21, 154, 156, 0.12);
+    }
 
-/* Buttons */
+    div[data-baseweb="select"] > div {
+        background-color: #FFFFFF;
+        border: 1px solid #C9D7E2;
+        border-radius: 10px;
+    }
 
-.stButton > button {
-    background-color: #302A24;
-    color: #F9F4EA;
-    border: none;
-    border-radius: 10px;
-    padding: 11px 25px;
-    font-weight: 600;
-}
+    /* ---------- File uploader ---------- */
 
-.stButton > button:hover {
-    background-color: #4A4036;
-    color: white;
-}
+    div[data-testid="stFileUploader"] {
+        background: #F8FBFD;
+        border: 1.5px dashed #9BB7C9;
+        border-radius: 14px;
+        padding: 12px;
+        transition: 0.2s;
+    }
 
-/* Metrics */
+    div[data-testid="stFileUploader"]:hover {
+        border-color: #159A9C;
+        background: #F2FAFA;
+    }
 
-div[data-testid="stMetric"] {
-    background-color: #F7F1E8;
-    border: 1px solid #DDD2C2;
-    padding: 15px;
-    border-radius: 12px;
-}
+    /* ---------- Buttons ---------- */
 
-/* Divider */
+    .stButton > button {
+        background: linear-gradient(
+            135deg,
+            #102A43,
+            #159A9C
+        );
+        color: #FFFFFF;
+        border: none;
+        border-radius: 11px;
+        padding: 13px 26px;
+        font-size: 16px;
+        font-weight: 700;
+        box-shadow: 0 5px 14px rgba(16, 42, 67, 0.18);
+        transition: all 0.2s ease;
+    }
 
-hr {
-    border-color: #DDD2C2;
-}
+    .stButton > button:hover {
+        background: linear-gradient(
+            135deg,
+            #0B2238,
+            #118184
+        );
+        color: #FFFFFF;
+        transform: translateY(-1px);
+        box-shadow: 0 7px 18px rgba(16, 42, 67, 0.24);
+    }
 
-</style>
-""", unsafe_allow_html=True)
+    /* ---------- Metrics ---------- */
 
+    div[data-testid="stMetric"] {
+        background: #FFFFFF;
+        border: 1px solid #D9E4EC;
+        padding: 18px;
+        border-radius: 14px;
+        box-shadow: 0 4px 14px rgba(16, 42, 67, 0.05);
+    }
+
+    div[data-testid="stMetricLabel"] {
+        color: #627487 !important;
+    }
+
+    div[data-testid="stMetricValue"] {
+        color: #102A43 !important;
+        font-weight: 750;
+    }
+
+    /* ---------- Success / warning messages ---------- */
+
+    div[data-testid="stAlert"] {
+        border-radius: 11px;
+    }
+
+    /* ---------- Divider ---------- */
+
+    hr {
+        border: none;
+        border-top: 1px solid #D8E3EA;
+        margin: 32px 0;
+    }
+
+    /* ---------- Footer ---------- */
+
+    .footer {
+        color: #8293A3;
+        font-size: 13px;
+        text-align: center;
+        margin-top: 55px;
+        padding-top: 20px;
+        border-top: 1px solid #D8E3EA;
+    }
+
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # =========================================================
 # HEADER
@@ -143,7 +214,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-
 # =========================================================
 # APPLICANT INFORMATION
 # =========================================================
@@ -154,7 +224,6 @@ st.markdown(
         <div class="section-title">
             Applicant Information
         </div>
-
         <div class="small">
             Enter the basic information required for the credit assessment.
         </div>
@@ -166,14 +235,12 @@ st.markdown(
 col1, col2 = st.columns(2)
 
 with col1:
-
     applicant_id = st.text_input(
         "Applicant ID",
         placeholder="e.g. APP-001"
     )
 
 with col2:
-
     work_type = st.selectbox(
         "Employment Type",
         [
@@ -191,24 +258,20 @@ requested_amount = st.number_input(
     value=10000.0
 )
 
-
 # =========================================================
-# DOCUMENT UPLOAD
+# APPLICANT EVIDENCE
 # =========================================================
 
 st.markdown(
     """
     <div class="card">
-
         <div class="section-title">
             Applicant Evidence
         </div>
-
         <div class="small">
             Upload the documents available for this applicant.
             Evidence quality will be considered before a final decision.
         </div>
-
     </div>
     """,
     unsafe_allow_html=True
@@ -216,76 +279,44 @@ st.markdown(
 
 col1, col2 = st.columns(2)
 
-
 with col1:
 
     identity_doc = st.file_uploader(
         "Identity Proof",
-        type=[
-            "pdf",
-            "png",
-            "jpg",
-            "jpeg"
-        ],
+        type=["pdf", "png", "jpg", "jpeg"],
         help="Government-issued identity document"
     )
 
     bank_doc = st.file_uploader(
         "Bank Statement",
-        type=[
-            "pdf",
-            "png",
-            "jpg",
-            "jpeg",
-            "csv",
-            "xlsx"
-        ],
+        type=["pdf", "png", "jpg", "jpeg", "csv", "xlsx"],
         help="Recent bank statement"
     )
-
 
 with col2:
 
     income_doc = st.file_uploader(
         "Income / Earnings Proof",
-        type=[
-            "pdf",
-            "png",
-            "jpg",
-            "jpeg",
-            "csv",
-            "xlsx"
-        ],
+        type=["pdf", "png", "jpg", "jpeg", "csv", "xlsx"],
         help="Payslip, earnings statement, or platform income record"
     )
 
     work_doc = st.file_uploader(
         "Employment / Platform Proof",
-        type=[
-            "pdf",
-            "png",
-            "jpg",
-            "jpeg"
-        ],
+        type=["pdf", "png", "jpg", "jpeg"],
         help="Platform profile, contract, or employment evidence"
     )
 
-
 # =========================================================
-# EVIDENCE QUALITY
+# DOCUMENT INFORMATION
 # =========================================================
 
 documents = {
-
     "Identity": identity_doc,
-
     "Bank statement": bank_doc,
-
     "Income / earnings": income_doc,
-
     "Employment / platform": work_doc
 }
-
 
 uploaded_count = sum(
     1
@@ -293,14 +324,15 @@ uploaded_count = sum(
     if document is not None
 )
 
+# =========================================================
+# EVIDENCE QUALITY
+# =========================================================
 
 st.markdown("---")
 
 st.subheader("Evidence Quality")
 
-
 col1, col2, col3 = st.columns(3)
-
 
 with col1:
 
@@ -308,7 +340,6 @@ with col1:
         "Documents Provided",
         f"{uploaded_count}/4"
     )
-
 
 with col2:
 
@@ -321,19 +352,15 @@ with col2:
         f"{completeness}%"
     )
 
-
 with col3:
 
     if uploaded_count >= 3:
-
         evidence_status = "GOOD"
 
     elif uploaded_count >= 1:
-
         evidence_status = "PARTIAL"
 
     else:
-
         evidence_status = "INSUFFICIENT"
 
     st.metric(
@@ -341,13 +368,11 @@ with col3:
         evidence_status
     )
 
-
 # =========================================================
 # DOCUMENT STATUS
 # =========================================================
 
 st.markdown("")
-
 
 for name, document in documents.items():
 
@@ -363,24 +388,18 @@ for name, document in documents.items():
             f"○ {name} not provided"
         )
 
-
 # =========================================================
-# SUBMIT APPLICANT
+# SUBMIT APPLICATION
 # =========================================================
 
 st.markdown("---")
 
 st.subheader("Submit Application")
 
-
 if st.button(
     "Submit Applicant",
     use_container_width=True
 ):
-
-    # -----------------------------------------------------
-    # VALIDATION
-    # -----------------------------------------------------
 
     if not applicant_id.strip():
 
@@ -396,13 +415,8 @@ if st.button(
 
     else:
 
-        # -------------------------------------------------
-        # CREATE APPLICANT DIRECTORY
-        # -------------------------------------------------
-
         applicant_folder = (
-            UPLOAD_DIR /
-            applicant_id.strip()
+            UPLOAD_DIR / applicant_id.strip()
         )
 
         applicant_folder.mkdir(
@@ -410,14 +424,9 @@ if st.button(
             exist_ok=True
         )
 
-
         saved_documents = []
 
-
-        # -------------------------------------------------
-        # SAVE DOCUMENTS
-        # -------------------------------------------------
-
+        # Save uploaded documents
         for name, document in documents.items():
 
             if document is not None:
@@ -427,8 +436,7 @@ if st.button(
                 ).name
 
                 destination = (
-                    applicant_folder /
-                    filename
+                    applicant_folder / filename
                 )
 
                 destination.write_bytes(
@@ -439,14 +447,9 @@ if st.button(
                     filename
                 )
 
-
-        # -------------------------------------------------
-        # SAVE APPLICATION METADATA
-        # -------------------------------------------------
-
+        # Save metadata
         metadata_file = (
-            applicant_folder /
-            "submission.txt"
+            applicant_folder / "submission.txt"
         )
 
         metadata_file.write_text(
@@ -461,11 +464,7 @@ if st.button(
             encoding="utf-8"
         )
 
-
-        # -------------------------------------------------
-        # SUCCESS
-        # -------------------------------------------------
-
+        # Success
         st.success(
             "Application submitted successfully."
         )
@@ -478,7 +477,6 @@ if st.button(
         st.markdown(
             """
             <div class="card">
-
                 <div class="section-title">
                     Application Received
                 </div>
@@ -488,12 +486,10 @@ if st.button(
                     through the evidence-quality, policy, and
                     credit decision pipeline.
                 </div>
-
             </div>
             """,
             unsafe_allow_html=True
         )
-
 
 # =========================================================
 # FOOTER
@@ -501,16 +497,143 @@ if st.button(
 
 st.markdown(
     """
-    <div
-        class="small"
-        style="
-            margin-top:50px;
-            text-align:center;
-            color:#8A8074;
-        "
-    >
-        SynthGigCredit • Evidence-Quality Credit Decisioning
-    </div>
+    <style>
+
+    .stApp {
+        background-color: #F4F7FB;
+        color: #172033;
+    }
+
+    .block-container {
+        max-width: 1150px;
+        padding: 45px 55px 60px 55px;
+    }
+
+    h1 {
+        color: #0F2742 !important;
+        font-size: 46px !important;
+        font-weight: 750 !important;
+        letter-spacing: -1.5px;
+    }
+
+    h2, h3 {
+        color: #0F2742 !important;
+    }
+
+    .subtitle {
+        color: #60758A;
+        font-size: 18px;
+        margin-bottom: 35px;
+    }
+
+    .card {
+        background-color: #FFFFFF;
+        border: 1px solid #D8E1EA;
+        border-radius: 16px;
+        padding: 26px 28px;
+        margin-bottom: 22px;
+        box-shadow: 0 4px 15px rgba(15, 39, 66, 0.06);
+    }
+
+    .section-title {
+        color: #0F2742;
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 7px;
+    }
+
+    .small {
+        color: #60758A;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    label {
+        color: #263B53 !important;
+        font-weight: 600 !important;
+    }
+
+    div[data-baseweb="input"] {
+        background-color: #FFFFFF;
+        border: 1px solid #C8D4DF;
+        border-radius: 10px;
+    }
+
+    div[data-baseweb="input"]:focus-within {
+        border-color: #2878C8;
+        box-shadow: 0 0 0 2px rgba(40, 120, 200, 0.12);
+    }
+
+    div[data-baseweb="select"] > div {
+        background-color: #FFFFFF;
+        border: 1px solid #C8D4DF;
+        border-radius: 10px;
+    }
+
+    div[data-testid="stFileUploader"] {
+        background-color: #FFFFFF;
+        border: 1.5px dashed #9FB4C8;
+        border-radius: 14px;
+        padding: 12px;
+    }
+
+    div[data-testid="stFileUploader"]:hover {
+        border-color: #2878C8;
+        background-color: #F7FAFD;
+    }
+
+    .stButton > button {
+        background-color: #0F2742;
+        color: #FFFFFF;
+        border: none;
+        border-radius: 10px;
+        padding: 13px 26px;
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+    .stButton > button:hover {
+        background-color: #17466F;
+        color: #FFFFFF;
+    }
+
+    div[data-testid="stMetric"] {
+        background-color: #FFFFFF;
+        border: 1px solid #D8E1EA;
+        padding: 18px;
+        border-radius: 14px;
+        box-shadow: 0 3px 12px rgba(15, 39, 66, 0.05);
+    }
+
+    div[data-testid="stMetricLabel"] {
+        color: #60758A !important;
+    }
+
+    div[data-testid="stMetricValue"] {
+        color: #0F2742 !important;
+        font-weight: 750;
+    }
+
+    div[data-testid="stAlert"] {
+        border-radius: 10px;
+    }
+
+    hr {
+        border: none;
+        border-top: 1px solid #D8E1EA;
+        margin: 32px 0;
+    }
+
+    .footer {
+        color: #8192A3;
+        font-size: 13px;
+        text-align: center;
+        margin-top: 55px;
+        padding-top: 20px;
+        border-top: 1px solid #D8E1EA;
+    }
+
+    </style>
     """,
     unsafe_allow_html=True
 )
