@@ -1,0 +1,74 @@
+# ============================================================================
+# JanSamarth Scheme — Policy Rules
+# ============================================================================
+# WARNING: ALL VALUES IN THIS FILE ARE UNVERIFIED — MUST BE REPLACED WITH
+# VERIFIED OFFICIAL SOURCE BEFORE Task 10b is marked complete.
+# See docs/policy_rule_verification.md for the verification procedure.
+#
+# These rules exist ONLY so the policy-engine framework (loader, Kleene eval,
+# versioning, provenance) can be built and unit-tested on fixtures.
+# NO CLAIM is made that these criteria match the actual JanSamarth portal rules.
+# The synthetic decision_date in configs/experiment.yaml is likewise UNVERIFIED.
+# ============================================================================
+
+rules:
+
+  - rule_id: "<UNVERIFIED-JS-001>"
+    policy_id: "jan_samarth"
+    policy_version: "<UNVERIFIED>"
+    effective_from: "2023-01-01"
+    effective_to: null
+    priority: 100
+    group: "age_eligibility"
+    condition:
+      attribute: "age"
+      operator: "BETWEEN"
+      value: [18, 60]
+    on_missing: "UNKNOWN"
+    source:
+      document_id: "<UNVERIFIED>"
+      page: "<UNVERIFIED>"
+      clause: "<UNVERIFIED>"
+      text: "<UNVERIFIED — placeholder age range; verify against official JanSamarth document>"
+      verified_by: "<UNVERIFIED>"
+      verified_on: "<UNVERIFIED>"
+
+  - rule_id: "<UNVERIFIED-JS-002>"
+    policy_id: "jan_samarth"
+    policy_version: "<UNVERIFIED>"
+    effective_from: "2023-01-01"
+    effective_to: null
+    priority: 100
+    group: "income_eligibility"
+    condition:
+      attribute: "annual_income"
+      operator: "<="
+      value: 1000000    # 10 lakh INR — UNVERIFIED placeholder; verify against official document
+    on_missing: "UNKNOWN"
+    source:
+      document_id: "<UNVERIFIED>"
+      page: "<UNVERIFIED>"
+      clause: "<UNVERIFIED>"
+      text: "<UNVERIFIED — placeholder income cap; verify against official JanSamarth document>"
+      verified_by: "<UNVERIFIED>"
+      verified_on: "<UNVERIFIED>"
+
+  - rule_id: "<UNVERIFIED-JS-003>"
+    policy_id: "jan_samarth"
+    policy_version: "<UNVERIFIED>"
+    effective_from: "2023-01-01"
+    effective_to: null
+    priority: 100
+    group: "occupation_eligibility"
+    condition:
+      attribute: "nonfarm_business_flag"
+      operator: "=="
+      value: 1    # UNVERIFIED — occupation criterion; verify against official document
+    on_missing: "UNKNOWN"
+    source:
+      document_id: "<UNVERIFIED>"
+      page: "<UNVERIFIED>"
+      clause: "<UNVERIFIED>"
+      text: "<UNVERIFIED — placeholder occupation/non-farm criterion; verify against official JanSamarth document>"
+      verified_by: "<UNVERIFIED>"
+      verified_on: "<UNVERIFIED>"

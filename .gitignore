@@ -1,0 +1,85 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/
+
+# Environment
+.env
+.env.local
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data
+data/*.csv
+data/*.zip
+
+# Dataset 2 raw files — do not commit (CC BY 4.0, download from Mendeley)
+data/raw/dataset2/*.csv
+data/raw/dataset2/*.xlsx
+data/raw/dataset2/*.xls
+data/raw/dataset2/*.sav
+data/raw/dataset2/*.zip
+
+# Models
+models/*.pkl
+models/*.json
+
+# Logs
+*.log
+logs/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+dist/
+dist-ssr/
+
+# Frontend
+frontend/dist/
+frontend/.vite/
+
+# Database
+*.db
+*.sqlite
+
+# Docker
+.dockerignore
+
+.venv311/
+
+.venv311/
+
+.venv311/
+
+data/synthetic/
+results/
+data/uploads/
+.venv311/
+
+data/authentic/
